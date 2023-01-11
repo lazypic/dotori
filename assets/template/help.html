@@ -1,0 +1,43 @@
+{{define "help"}}
+{{template "head"}}
+<body>
+    {{template "navbar" .}}
+    <div class="p-5 text-center text-muted">
+        <h3 class="pt-3">DOTORI</h3>
+        <p class="h6 font-weight-light">
+            <div class="p-1">
+                DOTORI는 웹 기반의 통합 에셋 라이브러리 입니다.
+            </div>
+            <div class="p-1">
+                오픈소스 프로젝트이며, <a href="https://github.com/RD101/dotori/blob/master/LICENSE" class="text-muted">BSD 3-Clause License</a>정책을 따르며 개발됩니다.
+            </div>
+        </p>
+        <p class="mt-2">
+            <small class="text-darkmode">
+                {{if .BuildTime}}
+                    Build Time: {{.BuildTime}}<br>
+                {{end}}
+                {{if .Sha1ver}}
+                    Git SHA1: <a href="https://github.com/rd101/dotori/commit/{{.Sha1ver}}" class="text-warning">{{.Sha1ver}}</a><br>
+                {{end}}
+            </small>
+            <small class="text-darkmode">
+                Number of CPU: {{.NumCPU}}<br>
+                Number of Max Process: {{.MaxProcessNum}}<br>
+                Number of ProcessBufferSize: {{.Adminsetting.ProcessBufferSize}}<br>
+            </small>
+        </p>
+    </div>
+    {{template "help_toolbar" .}}
+    {{template "help_search" .}}
+    {{template "help_checkbrowser" .}}
+    {{template "help_request" .}}
+    {{template "help_restapi" .}}
+    {{template "footer"}}
+</body>
+<!--add javascript-->
+<script src="/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/assets/bootstrap-4/js/bootstrap.min.js"></script>
+<script src="/assets/js/dotori.js"></script>
+</html>
+{{end}}

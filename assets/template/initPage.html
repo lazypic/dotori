@@ -1,0 +1,22 @@
+{{define "initPage"}}
+    {{template "head"}}
+    <body>
+      <!-- Preset Value -->
+      <input type="hidden" id="token" value="{{$.User.Token}}">
+      <input type="hidden" id="userid" value="{{$.User.ID}}">
+      <!-- Templates -->
+      {{template "modal" .}}
+      {{template "navbar" .}}
+      {{template "search" .}}
+      <h6 class="init-title">{{$.Adminsetting.Appname}} has {{$.AllItemCount}} Assets.</h6>
+      {{template "itemsRecentlyCreate" .}}
+      {{template "itemsTopUsing" .}}
+      {{template "itemsRecentlyTag" .}}
+      {{template "footer"}}
+    </body>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/bootstrap-4/js/bootstrap.min.js"></script>
+    <script src="/assets/tata/tata.js"></script>
+    <script src="/assets/js/dotori.js"></script>
+    </html>
+{{end}}

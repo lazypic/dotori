@@ -1,0 +1,96 @@
+{{define "navbar-bootstrap5"}}
+
+<input type="hidden" id="token" value="{{$.User.Token}}">
+<input type="hidden" id="userid" value="{{$.User.ID}}">
+
+<nav class="navbar navbar-expand-lg navbar-darkmode">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" data-bs-toggle="tooltip" data-bs-placement="right" title="홈으로 이동합니다.">{{$.Adminsetting.Appname}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Add
+            </a>
+            <div class="dropdown-menu">
+              {{if $.Adminsetting.Maya}}<a class="dropdown-item" href="/addmaya">Maya</a>{{end}}
+              {{if $.Adminsetting.Max}}<a class="dropdown-item" href="/addmax">Max</a>{{end}}
+              {{if $.Adminsetting.Houdini}}<a class="dropdown-item" href="/addhoudini">Houdini</a>{{end}}
+              {{if $.Adminsetting.Blender}}<a class="dropdown-item" href="/addblender">Blender</a>{{end}}
+              {{if $.Adminsetting.Alembic}}<a class="dropdown-item" href="/addalembic">Alembic</a>{{end}}
+              {{if $.Adminsetting.USD}}<a class="dropdown-item" href="/addusd">USD</a>{{end}}
+              {{if $.Adminsetting.Unreal}}<a class="dropdown-item" href="/addunreal">Unreal</a>{{end}}
+              {{if $.Adminsetting.OpenVDB}}<a class="dropdown-item" href="/addopenvdb">OpenVDB</a>{{end}}
+              {{if $.Adminsetting.Modo}}<a class="dropdown-item" href="/addmodo">Modo</a>{{end}}
+              {{if $.Adminsetting.Fusion360}}<a class="dropdown-item" href="/addfusion360">Fusion360</a>{{end}}
+              {{if $.Adminsetting.Katana}}<a class="dropdown-item" href="/addkatana">Katana</a>{{end}}
+              {{if $.Adminsetting.HWP}}<a class="dropdown-item" href="/addhwp">HWP</a>{{end}}
+              {{if $.Adminsetting.PDF}}<a class="dropdown-item" href="/addpdf">PDF</a>{{end}}
+              {{if $.Adminsetting.PPT}}<a class="dropdown-item" href="/addppt">PPT</a>{{end}}
+              {{if $.Adminsetting.LUT}}<a class="dropdown-item" href="/addlut">LUT</a>{{end}}
+              {{if $.Adminsetting.HDRI}}<a class="dropdown-item" href="/addhdri">HDRI</a>{{end}}
+              {{if $.Adminsetting.IES}}<a class="dropdown-item" href="/addies">IES</a>{{end}}
+              {{if $.Adminsetting.Texture}}<a class="dropdown-item" href="/addtexture">Texture</a>{{end}}
+              {{if $.Adminsetting.Matte}}<a class="dropdown-item" href="/addmatte">Matte</a>{{end}}
+              {{if $.Adminsetting.Footage}}<a class="dropdown-item" href="/addfootage">Footage</a>{{end}}
+              {{if $.Adminsetting.MultipleFootage}}<a class="dropdown-item" href="/addfootage-items">Multiple Footage (Intranet)</a>{{end}}
+              {{if $.Adminsetting.Clip}}<a class="dropdown-item" href="/addclip">Clip</a>{{end}}
+              {{if $.Adminsetting.MultipleClip}}<a class="dropdown-item" href="/addclip-items">Multiple Clip (Intranet)</a>{{end}}
+              {{if $.Adminsetting.Nuke}}<a class="dropdown-item" href="/addnuke">Nuke</a>{{end}}
+              {{if $.Adminsetting.Sound}}<a class="dropdown-item" href="/addsound">Sound</a>{{end}}
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Edit
+          </a>
+          <div class="dropdown-menu">
+              <span class="dropdown-item finger" data-bs-toggle="modal" data-bs-target="#modal-edittags">Edit Tags</span>
+              <span class="dropdown-item finger" onclick="CopyPaths()" data-bs-toggle="modal" data-bs-target="#modal-copypaths">Copy Paths</span>
+              <span class="dropdown-item finger" onclick="SelectAll()">Select All</span>
+              <span class="dropdown-item finger" onclick="SelectNone()">Select None</span>
+              <span class="dropdown-item finger" data-bs-toggle="modal" data-bs-target="#modal-setcategory">Set Category</span>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tags">Tags</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/item-process">Process</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/help">Help</a>
+        </li>
+        {{if eq $.Token.AccessLevel "admin" "manager"}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-danger" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Setting
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/users">Users</a>
+                <a class="dropdown-item" href="/adminsetting">Admin Setting</a>
+                <a class="dropdown-item" href="/category">Category</a>
+                <a class="dropdown-item" href="/rename">Rename Tool</a>
+                <a class="dropdown-item" href="/cleanup-db">Clean Up DB</a>
+                <span class="dropdown-item finger" onclick="BackupDB()">Backup DB</span>
+            </div>
+          </li>
+        {{end}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {{if $.Token.ID}}{{$.Token.ID}}{{else}}User{{end}}
+          </a>
+          <div class="dropdown-menu">
+              <a class="dropdown-item" href="/profile">Profile</a>
+              <a class="dropdown-item" href="/favoriteassets">Favorite Assets</a>
+              <a class="dropdown-item" href="/signout">SignOut</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{{end}}

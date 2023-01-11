@@ -1,0 +1,8 @@
+{{define "itemsRecentlyTag"}}
+<h6 class="init-title">New Tags {{len $.RecentTags}}</h6>
+<div class="init-tags">
+    {{range .RecentTags}}
+        <a href="/search?searchword=tag:{{.}}" class="tag badge badge-outline-darkmode">{{.}}</a>
+    {{end}}
+</div>
+{{end}}

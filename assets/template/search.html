@@ -1,0 +1,70 @@
+{{define "search"}}
+<form action="/search-submit" method="POST">
+	<div class="row justify-content-center align-items-center m-3">
+		<div class="col-lg-7">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<select name="itemtype" class="form-select custom-select left-radius">
+						<option value="" {{if eq .ItemType "" }}selected{{end}}>All</option>
+						{{if $.Adminsetting.Maya}}<option value="maya" {{if eq .ItemType "maya" }}selected{{end}}>Maya</option>{{end}}
+						{{if $.Adminsetting.Max}}<option value="max" {{if eq .ItemType "max" }}selected{{end}}>Max</option>{{end}}
+						{{if $.Adminsetting.Houdini}}<option value="houdini" {{if eq .ItemType "houdini" }}selected{{end}}>Houdini</option>{{end}}
+						{{if $.Adminsetting.Blender}}<option value="blender" {{if eq .ItemType "blender" }}selected{{end}}>Blender</option>{{end}}
+						{{if $.Adminsetting.Alembic}}<option value="alembic" {{if eq .ItemType "alembic" }}selected{{end}}>Alembic</option>{{end}}
+						{{if $.Adminsetting.USD}}<option value="usd" {{if eq .ItemType "usd" }}selected{{end}}>USD</option>{{end}}
+						{{if $.Adminsetting.Unreal}}<option value="unreal" {{if eq .ItemType "unreal" }}selected{{end}}>Unreal</option>{{end}}
+						{{if $.Adminsetting.OpenVDB}}<option value="openvdb" {{if eq .ItemType "openvdb" }}selected{{end}}>OpenVDB</option>{{end}}
+						{{if $.Adminsetting.Modo}}<option value="modo" {{if eq .ItemType "modo" }}selected{{end}}>Modo</option>{{end}}
+						{{if $.Adminsetting.Fusion360}}<option value="fusion360" {{if eq .ItemType "fusion360" }}selected{{end}}>Fusion360</option>{{end}}
+						{{if $.Adminsetting.Katana}}<option value="katana" {{if eq .ItemType "katana" }}selected{{end}}>Katana</option>{{end}}
+						{{if $.Adminsetting.HWP}}<option value="hwp" {{if eq .ItemType "hwp" }}selected{{end}}>HWP</option>{{end}}
+						{{if $.Adminsetting.PDF}}<option value="pdf" {{if eq .ItemType "pdf" }}selected{{end}}>PDF</option>{{end}}
+						{{if $.Adminsetting.PPT}}<option value="ppt" {{if eq .ItemType "ppt" }}selected{{end}}>PPT</option>{{end}}
+						{{if $.Adminsetting.LUT}}<option value="lut" {{if eq .ItemType "lut" }}selected{{end}}>LUT</option>{{end}}
+						{{if $.Adminsetting.HDRI}}<option value="hdri" {{if eq .ItemType "hdri" }}selected{{end}}>HDRI</option>{{end}}
+						{{if $.Adminsetting.IES}}<option value="ies" {{if eq .ItemType "ies" }}selected{{end}}>IES</option>{{end}}
+						{{if $.Adminsetting.Texture}}<option value="texture" {{if eq .ItemType "texture" }}selected{{end}}>Texture</option>{{end}}
+						{{if $.Adminsetting.Matte}}<option value="matte" {{if eq .ItemType "matte" }}selected{{end}}>Matte</option>{{end}}
+						{{if $.Adminsetting.Footage}}<option value="footage" {{if eq .ItemType "footage" }}selected{{end}}>Footage</option>{{end}}
+						{{if $.Adminsetting.Clip}}<option value="clip" {{if eq .ItemType "clip" }}selected{{end}}>Clip</option>{{end}}
+						{{if $.Adminsetting.Nuke}}<option value="nuke" {{if eq .ItemType "nuke" }}selected{{end}}>Nuke</option>{{end}}
+						{{if $.Adminsetting.Sound}}<option value="sound" {{if eq .ItemType "sound" }}selected{{end}}>Sound</option>{{end}}
+					</select>
+				</div>
+				{{if $.Adminsetting.EnableCategory}}
+					<div class="input-group-append">
+						<select id="searchbox-rootcategory-id" name="searchbox-rootcategory-id" class="form-select custom-select" onchange="changeSearchboxRootCategory()">
+							<option value="">Root Category</option>
+							{{range .RootCategories}}
+								<option value="{{.ID.Hex}}" {{if eq $.RootCategoryID .ID.Hex}}selected{{end}}>{{.Name}}</option>
+							{{end}}
+						</select>
+					</div>
+
+					<div class="input-group-append">
+						<select id="searchbox-subcategory-id" name="searchbox-subcategory-id" class="form-select custom-select">
+							<option value="">Sub Category</option>
+							{{range .SubCategories}}
+								<option value="{{.ID.Hex}}" {{if eq $.SubCategoryID .ID.Hex}}selected{{end}}>{{.Name}}</option>
+							{{end}}
+							
+						</select>
+					</div>
+				{{end}}
+				
+				<input class="form-control" id="searchword" placeholder="Search word.." type="text" name="searchword" value="{{.Searchword}}">
+				
+				<div class="input-group-append">
+					<button class="btn btn-darkmode" id="button">
+						Search
+						<span class="badge badge-secondary ml-3">{{$.TotalNum}}</span>
+					</button>
+				</div>
+			</div>
+        </div>
+    </div>
+</form>
+
+
+
+{{end}}  

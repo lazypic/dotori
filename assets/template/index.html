@@ -1,0 +1,18 @@
+{{define "index"}}
+    {{template "head"}}
+    <body>
+        {{template "navbar" .}}
+        {{template "search" .}}
+        {{template "modal" .}}
+        {{template "items" .}}
+        {{if .Items}}
+            {{template "page" .}}
+        {{end}}
+        {{template "footer"}}
+    </body>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/bootstrap-4/js/bootstrap.min.js"></script>
+    <script src="/assets/tata/tata.js"></script>
+    <script src="/assets/js/dotori.js"></script>
+    </html>
+{{end}}

@@ -1,0 +1,24 @@
+{{define "invalidaccess"}}
+{{template "head-bootstrap5"}}
+<body>
+<div class="container p-5">
+    <div class="col-lg-6 col-md-6 col-sm-12 mx-auto">
+        <div class="pt-3 pb-5">
+            <h2 class="text-center section-heading text-muted">Invalid Access</h2>
+        </div>
+        <div>
+            <h4 class="text-center text-muted">
+                You do not have access.
+            </h4>
+        </div>
+        <div class="text-center">
+            <a href="javascript:history.back()" class="btn btn-darkmode mt-5">Back</a>
+        </div>
+    </div>
+</div>
+{{template "footer"}}
+</body>
+<!--add javascript-->
+<script src="/assets/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+</html>
+{{end}}

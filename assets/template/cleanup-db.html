@@ -1,0 +1,108 @@
+{{define "cleanup-db"}}
+{{template "head"}}
+<body>
+{{template "navbar" .}}
+<form action="/cleanup-db-submit" method="post">
+<div class="container pt-5 pb-5">
+    <div class="text-center mx-auto pt-5 pb-5">
+        <h2 class="text-muted">Clean Up DB</h2>
+    </div>
+    <div class="row pt-1 pb-1 text-muted text-center">
+        <div class="col-sm-2 col-md-2 col-lg-1">
+            index
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-1">
+            <input type="checkbox" class="form-check-input" id="toggle-checkbox" onclick="toggleItems();">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-1">
+            itemtype
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-2">
+            title
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-1">
+            author
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            id
+        </div>
+        <div class="col-sm-4 col-md-2 col-lg-1">
+            thumbimg
+        </div>
+        <div class="col-sm-4 col-md-2 col-lg-1">
+            thumbmov
+        </div>
+        <div class="col-sm-4 col-md-2 col-lg-1">
+            data
+        </div>
+    </div>
+    <div>
+        <hr class="my-1 p-0 m-0 divider">
+    </div>
+    <div class="text-muted text-center">
+        {{$index := 1}}
+        {{range .Items}}
+        <label style="width : 100%">
+            <div class="row py-3">
+                <div class="col-sm-2 col-md-2 col-lg-1">
+                    <span class="text-center">{{$index}}</span>
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-1">
+                    <input type="checkbox" id="item{{$index}}" name="checkbox{{$index}}"class="form-check-input" value="{{.ID.Hex}}">
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-1">
+                    {{.ItemType}}
+                </div>
+                <input type="hidden" id="itemtype{{$index}}" name="itemtype{{$index}}" value="{{.ItemType}}">
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    {{.Title}}
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-1">
+                    {{.Author}}
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    {{.ID.Hex}}
+                </div>
+                <div class="col-sm-4 col-md-2 col-lg-1">
+                    {{if .ThumbImgUploaded}}
+                    <span class="badge badge-pill badge-success">O</span>
+                    {{else}}
+                    <span class="badge badge-pill badge-secondary">X</span>
+                    {{end}}
+                </div>
+                <div class="col-sm-4 col-md-2 col-lg-1">
+                    {{if .ThumbClipUploaded}}
+                    <span class="badge badge-pill badge-success">O</span>
+                    {{else}}
+                    <span class="badge badge-pill badge-secondary">X</span>
+                    {{end}}
+                </div>
+                <div class="col-sm-4 col-md-2 col-lg-1">
+                    {{if .DataUploaded}}
+                    <span class="badge badge-pill badge-success">O</span>
+                    {{else}}
+                    <span class="badge badge-pill badge-secondary">X</span>
+                    {{end}}
+                </div>
+            </div>
+            <div>
+                <hr class="my-1 p-0 m-0 divider">
+            </div>
+        </label>
+        {{$index = add $index 1}}
+        {{end}}
+    </div>
+    <input type="hidden" id="itemnum" name="itemnum" value="{{$index}}">
+    <div class="text-center pt-5">
+        <button type="submit" class="btn btn-outline-danger">DELETE</button>
+    </div>
+</div>
+</form>
+{{template "footer"}}
+</body>
+<!--add javascript-->
+<script src="/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/assets/bootstrap-4/js/bootstrap.min.js"></script>
+<script src="/assets/js/dotori.js"></script>
+</html>
+{{end}}
