@@ -24,6 +24,7 @@ VFX, Animation, Game, Sound, Reference Data, Etc Data 등 콘텐츠 제작에 �
 - 개발지원: [(주)로드원오원](http://rd101.co.kr), [(주)엔진비주얼웨이브](http://www.enginevw.co.kr), [Lazypic,LLC.](https://lazypic.org)
 - 권리자(발명자): [Contributors](https://github.com/RD101/dotori/graphs/contributors)
 - 테스트서버: <https://dotori.lazypic.com>
+- [Google Site](https://sites.google.com/view/lazypic/dotori)
 
 ## Roadmap 2022
 
